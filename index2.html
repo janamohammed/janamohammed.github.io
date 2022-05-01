@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="description" content="books website"/>
+<title> Audio books</title>
+<link rel="stylesheet" href="css2/pro2.css">
+<title>Audio book</title>
+</head>
+<body>
+   <div class="container">
+      <header>
+         <h1>Audio books</h1>
+          </header>
+          <!--the web page elements-->
+      <div class="content">
+         <div class="text">
+            <h2><i>About the book</i></h2><br>
+            <h3>Name:</h3><br><p>Wild pastures</p><br>
+            <h3>Author:</h3><br><p>Winthrop Packard</p><br>
+            <a href="https://audiovina.com/wild-pastures/" target="blank">click here to continue listening</a>
+         </div>
+         <div class="image">
+            <img src="book2.jpg" alt="The photo isn't found" class="test"><br><br><br>
+            <audio src="itaudio.mpeg" controls alt="The audio isn't found"></audio>
+         </div>
+         
+      </div>
+   </div>
+    <script>
+      startImageTransition();
+   
+      function startImageTransition() {
+          var images = document.getElementsByClassName("test");
+   
+          
+          for (var i = 0; i < images.length; ++i) {
+              images[i].style.opacity = 1;
+          }
+          var top = 1;
+         var cur = images.length - 1;
+         setInterval(changeImage, 3000);
+         async function changeImage() {
+         var nextImage = (1 + cur) % images.length;
+              images[cur].style.zIndex = top + 1;
+              images[nextImage].style.zIndex = top;
+   
+              
+              await transition();
+             images[cur].style.zIndex = top;
+             images[nextImage].style.zIndex = top + 1;
+   
+              top = top + 1;
+            
+              images[cur].style.opacity = 1;
+              cur = nextImage;
+          }
+              function transition() {
+              return new Promise(function (resolve, reject) {
+                  var del = 0.01;
+                  var id = setInterval(changeOpacity, 10);
+                  function changeOpacity() {
+                      images[cur].style.opacity -= del;
+                      if (images[cur].style.opacity <= 0) {
+                          clearInterval(id);
+                          resolve();
+                      }
+                  }
+              })
+          }
+      }
+  </script>
+</body>
+</html>
+
+
+	
